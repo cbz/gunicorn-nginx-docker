@@ -18,36 +18,36 @@ libraries can be installed - these can be stripped out for a smaller image.
 
 ## Customization
 
+### Custom app directory
+
+By default the container expects the app to be in a directory '/app'. This can
+be overridden with the `APPDIR` environment variable
+
+```Dockerfile
+
+ENV APPDIR /application
+```
+
 ### Custom app name
 
 By default an app called main:app in the directory `/app` is executed
-this can be specified and overridden with the `GUNICORN_APP` 
+this can be specified and overridden with the `MODULE_APP` 
 environment variable.
 
 ```Dockerfile
 
-ENV GUNICORN_APP myapp:app
-```
-
-### Custom app directory
-
-By default the container expects the app to be in a directory '/app'. This can
-be overridden with the `GUNICORN_APPDIR` environment variable
-
-```Dockerfile
-
-ENV GUNICORN_APPDIR /application
+ENV MODULE_APP myapp:app
 ```
 
 ### Custom number of gunicorn workers
 
 By default the container will launch a number of gunicorn workers equal to 
-_cpus + 1_ this can be overriden using the `GUNICORN_WORKERS` environment
+_cpus + 1_ this can be overriden using the `CONCURRENCY` environment
 variable.
 
 ```Dockerfile
 
-ENV GUNICORN_WORKERS 4
+ENV CONCURRENCY 4
 ```
 
 ### Custom maximum upload size

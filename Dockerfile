@@ -169,12 +169,12 @@ COPY nginx.upload.conf /etc/nginx/conf.d/upload.conf
 RUN mkdir -p /etc/sv/nginx
 RUN mkdir -p /etc/sv/gunicorn
 
-COPY nginx_run /etc/sv/nginx/run
-COPY gunicorn_run /etc/sv/gunicorn/run
+COPY run_nginx /etc/sv/nginx/run
+COPY run_gunicorn /etc/sv/gunicorn/run
 RUN chmod +x /etc/sv/nginx/run
 RUN chmod +x /etc/sv/gunicorn/run
 
 # Copy Sample APP
 COPY ./app /app
-
+WORKDIR /app
 ENTRYPOINT ["/runit_bootstrap", "--"]
