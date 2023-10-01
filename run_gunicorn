@@ -4,7 +4,7 @@
 source /etc/env
 
 # Set default value for app directory if its not provided
-: ${APPDIR}:=/app}
+: ${APPDIR:=/app}
 
 # Set default value for app if it is not provided
 : ${MODULE_APP:=main:app}
@@ -13,5 +13,4 @@ source /etc/env
 : ${CONCURRENCY:=$(( `nproc` + 1))} 
 
 # Change to application directory
-cd ${APPDIR}
-exec /usr/local/bin/gunicorn --workers ${CONCURRENCY} --worker-class="egg:meinheld#gunicorn_worker" --bind unix:/run/gunicorn.sock ${MODULE_APP}
+exec /usr/local/bin/gunicorn --chdir ${APPDIR} --workers ${CONCURRENCY} --worker-class="egg:meinheld#gunicorn_worker" --bind unix:/run/gunicorn.sock ${MODULE_APP}

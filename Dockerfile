@@ -1,11 +1,11 @@
-FROM python:3.7-alpine3.9
+FROM python:3.9.18-alpine3.18
 
 # Standard set up Nginx Alpine
 # From https://raw.githubusercontent.com/nginxinc/docker-nginx/2364fdc54af554d28ef95b7be381677d10987986/mainline/alpine/Dockerfile
 
-ENV NGINX_VERSION 1.15.8
+ENV NGINX_VERSION 1.25.2
 
-RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
+RUN GPG_KEYS=13C82A63B603576156E30A4EA0EA981B66B0D967 \
 	&& CONFIG="\
 		--prefix=/etc/nginx \
 		--sbin-path=/usr/sbin/nginx \
@@ -60,7 +60,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		zlib-dev \
 		linux-headers \
 		curl \
-		gnupg1 \
+		gnupg \
 		libxslt-dev \
 		gd-dev \
 	&& curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \

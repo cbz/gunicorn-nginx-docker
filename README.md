@@ -1,6 +1,6 @@
 # gunicorn-nginx
 **Docker** image with **gunicorn** and **nginx** for web applications
-written in the latest stable version of **Python** (currently 3.7).
+written in the latest stable version of **Python** (currently 3.9.18).
 
 ## Description
 
