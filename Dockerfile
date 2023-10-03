@@ -1,4 +1,4 @@
-FROM python:3.9.18-alpine3.18
+FROM python:3.12-alpine
 
 # Standard set up Nginx Alpine
 # From https://raw.githubusercontent.com/nginxinc/docker-nginx/2364fdc54af554d28ef95b7be381677d10987986/mainline/alpine/Dockerfile
@@ -136,8 +136,9 @@ RUN GPG_KEYS=13C82A63B603576156E30A4EA0EA981B66B0D967 \
 RUN apk add --no-cache --virtual .python-dev gcc make musl-dev \
         && pip install flask		\
 	&& pip install gunicorn		\
-	&& pip install meinheld		
-#	&& apk del .python-dev	
+	&& pip install gevent		\
+	&& pip install gunicorn[gevent]	
+#	&& apk del .python-dev
 	
 # Install database dependencies - these can be optionally removed for smaller container
 # size
@@ -153,7 +154,6 @@ RUN wget -O runit-docker.tar.gz https://github.com/pixers/runit-docker/archive/1
     make && \
     make install && \
     cd .. && rm -rf runit-docker-1.1
-
 
 # Copy over runit_bootstrap file for saving vars
 COPY runit_bootstrap /runit_bootstrap

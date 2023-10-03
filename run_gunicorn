@@ -13,4 +13,4 @@ source /etc/env
 : ${CONCURRENCY:=$(( `nproc` + 1))} 
 
 # Change to application directory
-exec /usr/local/bin/gunicorn --chdir ${APPDIR} --workers ${CONCURRENCY} --worker-class="egg:meinheld#gunicorn_worker" --bind unix:/run/gunicorn.sock ${MODULE_APP}
+exec /usr/local/bin/gunicorn --chdir ${APPDIR} --workers ${CONCURRENCY} --worker-class="gevent" --bind unix:/run/gunicorn.sock ${MODULE_APP}
